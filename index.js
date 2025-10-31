@@ -148,28 +148,28 @@ app.get("/hotels", async (req, res) => {
   }
 })
 
-// // find a hotel with a particular name
-// async function readHotelByName (hotelName) {
-//   try{
-//     const hotel = await Hotel.findOne ({name:hotelName})
-//     return hotel
-//   } catch (error) {
-//     throw error
-//   }
-// }
+// find a hotel with a particular name
+async function readHotelByName (hotelName) {
+  try{
+    const hotel = await Hotel.findOne ({name:hotelName})
+    return hotel
+  } catch (error) {
+    throw error
+  }
+}
 
-// app.get("/hotels/:hotelName", async (req, res) => {
-//   try {
-//     const hotel = await readHotelByName (req.params.hotelName)
-//     if (hotel) {
-//       res.json(hotel)
-//     } else {
-//       res.status(404).json({ error: "hotel not found with this name." })
-//     }
-//   } catch (error) {
-//     res.status(500).json({ error: "Failed to Fetch hotel with this name." })
-//   }
-// })
+app.get("/hotels/:hotelName", async (req, res) => {
+  try {
+    const hotel = await readHotelByName (req.params.hotelName)
+    if (hotel) {
+      res.json(hotel)
+    } else {
+      res.status(404).json({ error: "hotel not found with this name." })
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to Fetch hotel with this name." })
+  }
+})
 
 // // find a hotel by phone number
 // async function readHotelByPhoneNumber (phoneNumber) {
