@@ -171,6 +171,28 @@ app.get("/hotels/:hotelName", async (req, res) => {
   }
 })
 
+// Add a Hotel in the database
+async function createHotel(newHotel) {
+  try {
+    const hotel = new Hotel(newHotel)
+    const saveHotel = await hotel.save()
+    return saveHotel
+  } catch (error) {
+    throw error
+  }
+}
+
+app.post("/addHotel", async (req, res) => {
+  try {
+    const savedHotel = await createHotel(req.body)
+    res
+      .status(201)
+      .json({ message: "hotel added successfully", hotel: savedHotel })
+  } catch (error) {
+    res.status(500).json({ error: "Failed to add hotel" })
+  }
+})
+
 // // find a hotel by phone number
 // async function readHotelByPhoneNumber (phoneNumber) {
 //   try{
