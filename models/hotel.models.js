@@ -49,7 +49,12 @@ const hotelSchema = new mongoose.Schema(
         type: String,
       },
     ],
-    priceRange: String,
+    priceRange: [
+      {
+        type: String,
+        enum:["100", "500", "1000", "2000"]
+      },
+    ],
     reservationsNeeded: {
       type: Boolean,
       default: false,
